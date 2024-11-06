@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+    jenkins-ci-server:
+      user: root
+      container_name: 'jenkins-ci-server'
+      image: jenkins/jenkins:lts
+      environment:
+        - USER_UID=1000
+      volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /usr/bin/docker:/usr/bin/docker
+      ports:
+        - "8080:8080"
+        - "50000:50000"
+volumes:
+  jenkins_home:
+
