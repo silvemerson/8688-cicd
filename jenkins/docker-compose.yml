@@ -7,7 +7,10 @@ services:
       image: jenkins/jenkins:lts
       environment:
         - USER_UID=1000
-      volumes:
+        - JAVA_OPTS=-Xmx2g -Xms2g
+      mem_limit: 4g
+      mem_reservation: 2g        
+      volumes:  
       - ./jenkins_home:/var/jenkins_home
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
