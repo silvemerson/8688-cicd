@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.8'
 
 services:
     jenkins-ci-server:
@@ -6,8 +6,7 @@ services:
       container_name: 'jenkins-ci-server'
       image: jenkins/jenkins:lts
       environment:
-        - USER_UID=1000
-        - JAVA_OPTS=-Xmx2g -Xms2g      
+        - USER_UID=1000 
       volumes:  
       - ./jenkins_home:/var/jenkins_home
       - /etc/timezone:/etc/timezone:ro
