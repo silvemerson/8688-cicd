@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-site
+  labels:
+    app: login-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: login-site
+  template:
+    metadata:
+      labels:
+        app: login-site
+    spec:
+      containers:
+        - name: login-site
+          image: silvemerson/login-site:75d28df5c627a10f36aeeb8baf3d205ba0c7c301  # Altere para o nome da sua imagem se necessário
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

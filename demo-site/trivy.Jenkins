@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages{
+        stage("Build"){
+            steps{
+                sh "docker build -t demo-site:1.${env.BUILD_ID} ."
+            }
+        }
+        stage("trivy scan"){
+            steps{
+                sh "trivy image --severity HIGH --exit-code 1 demo-site:1.${env.BUILD_ID}"
+            }
+        }
+    }
+    post {
+        failure {
+            echo "Pipeline abortada porque o Trivy encontrou falha de nivel HIGH"
+        }
+        success {
+            echo "Não foi encontada falha de nivel HIGH"
+        }
+    }
+}
